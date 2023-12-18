@@ -53,7 +53,8 @@ public class Player : MonoBehaviour
         {
             //myRigidbody.MovePosition(myRigidbody.position - velocity * Time.deltaTime);
             myRigidbody.velocity = new Vector2(-_currentSpeed, myRigidbody.velocity.y);
-            if(myRigidbody.transform.localScale.x != -1)
+
+            if (myRigidbody.transform.localScale.x != -1)
             {
                 myRigidbody.transform.DOScaleX(-1, playerSwipeDuration);
             }
@@ -63,6 +64,7 @@ public class Player : MonoBehaviour
         {
             //myRigidbody.MovePosition(myRigidbody.position + velocity * Time.deltaTime);
             myRigidbody.velocity = new Vector2(_currentSpeed, myRigidbody.velocity.y);
+
             if (myRigidbody.transform.localScale.x != 1)
             {
                 myRigidbody.transform.DOScaleX(1, playerSwipeDuration);
@@ -78,6 +80,7 @@ public class Player : MonoBehaviour
         {
             myRigidbody.velocity += friction;
         }
+
        else if (myRigidbody.velocity.x < 0)
         {
             myRigidbody.velocity -= friction;
@@ -85,24 +88,33 @@ public class Player : MonoBehaviour
        
     }
 
+
+
     private void HandleJump()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
             //myRigidbody.MovePosition(myRigidbody.position - velocity * Time.deltaTime);
             myRigidbody.velocity = Vector2.up * forceJump;
-            myRigidbody.transform.localScale = Vector2.one;
 
+            if (myRigidbody.transform.localScale.x != 1)
+            {
+                myRigidbody.transform.DOScaleX(1, playerSwipeDuration);
+            }
+
+            else if (myRigidbody.transform.localScale.x != -1)
+            {
+                myRigidbody.transform.DOScaleX(-1, playerSwipeDuration);
+            }
             DOTween.Kill(myRigidbody.transform);
-
-            HandleScaleJump();
+            //HandleScaleJump();
         }
 
     }
 
-    private void HandleScaleJump()
+    /*private void HandleScaleJump()
     {
         myRigidbody.transform.DOScaleY(jumpScaleY, animationDuration).SetLoops(2, LoopType.Yoyo).SetEase(ease);
         myRigidbody.transform.DOScaleX(jumpScaleX, animationDuration).SetLoops(2, LoopType.Yoyo).SetEase(ease);
-    }
+    } */
 }
