@@ -70,7 +70,7 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftControl))
         {
             _currentSpeed = soPlayerSetup.speedRun;
-            _currentPlayer.speed = 2;
+            _currentPlayer.speed = 1.5f;
         }
         else
         {

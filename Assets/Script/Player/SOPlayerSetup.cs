@@ -8,6 +8,7 @@ using UnityEngine;
 public class SOPlayerSetup : ScriptableObject
 {
     public Animator player;
+    public SOString soStringName;
 
     [Header("Speed Setup")]
     //public Vector2 velocity;
