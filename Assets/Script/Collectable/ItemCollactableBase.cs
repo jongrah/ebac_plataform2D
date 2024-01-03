@@ -19,6 +19,11 @@ public class ItemCollactableBase : MonoBehaviour
         {
             particleCoin.transform.parent = null;
         }
+
+        if (audioSource != null)
+        {
+            audioSource.transform.parent = null;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

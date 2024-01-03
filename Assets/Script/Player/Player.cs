@@ -41,11 +41,16 @@ public class Player : MonoBehaviour
     [SerializeField] private HeathBase _heathBase;
 
     [Header("Jump Collision Check")]
-    public Collider2D collider2D;
+    public Collider2D _collider2D;
     public float distToGround;
     public float spaceToGround = .1f;
 
     public ParticleSystem jumpVFX;
+
+    public AudioSource jumpSound;
+
+    public string triggerJump = "Jump";
+
 
     private void Awake()
     {
@@ -56,9 +61,9 @@ public class Player : MonoBehaviour
 
         _currentPlayer = Instantiate(soPlayerSetup.player,transform);
 
-        if (collider2D != null)
+        if (_collider2D != null)
         {
-            distToGround = collider2D.bounds.extents.y;
+            distToGround = _collider2D.bounds.extents.y;
         }
     }
 
@@ -158,6 +163,8 @@ public class Player : MonoBehaviour
             DOTween.Kill(myRigidbody.transform);
             //HandleScaleJump();
             PlayJumpVFX();
+            PlayJumpSound();
+            PlayJumpAnimation();
         }
 
     }
@@ -174,8 +181,21 @@ public class Player : MonoBehaviour
         myRigidbody.transform.DOScaleX(soPlayerSetup.jumpScaleX, soPlayerSetup.animationDuration).SetLoops(2, LoopType.Yoyo).SetEase(soPlayerSetup.ease);
     } */
 
+    private void PlayJumpSound()
+    {
+        if (jumpSound != null)
+        {
+            jumpSound.Play();
+        }
+    }
+
     public void DestroyMe()
     {
         Destroy(gameObject);
+    }
+
+    public void PlayJumpAnimation()
+    {
+        _currentPlayer.SetTrigger(triggerJump);
     }
 }

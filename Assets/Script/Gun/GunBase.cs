@@ -12,6 +12,8 @@ public class GunBase : MonoBehaviour
 
     private Coroutine _currentCoroutine;
 
+    public AudioSource audioSource;
+
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.S))
@@ -41,5 +43,10 @@ public class GunBase : MonoBehaviour
         var projectile = Instantiate(prefabProjectile);
         projectile.transform.position = positionToShoot.position;
         projectile.side = playerSideReference.transform.localScale.x;
+
+        if (audioSource != null)
+        {
+            audioSource.Play();
+        }
     }
 }
